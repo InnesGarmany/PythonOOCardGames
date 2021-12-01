@@ -11,8 +11,8 @@ class Test(unittest.TestCase):
     
     def test_valid_deal_input(self):
         test_input = TestInput()
-        self.test.set_user_input(test_input)
         test_input.set_test_inputs(["D", "S"])
+        self.test.set_user_input(test_input)
         result = self.test.valid_deal_input()
         self.assertTrue("D"== result)
         
