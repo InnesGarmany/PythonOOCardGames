@@ -74,7 +74,7 @@ class PlayingCard:
     def is_playing_a_card(self, hand, card_to_play):
         played = False
         current_size = len(hand)
-        play_a_card(hand, card_to_play)
+        self.play_a_card(hand, card_to_play)
         if current_size > len(hand):
             played = True
         return played

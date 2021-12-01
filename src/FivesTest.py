@@ -14,7 +14,9 @@ class Test(unittest.TestCase):
         result = self.test.start_round()
         self.assertTrue(len(result) == 4)
 
-    
+    def test_determine_trump(self):
+        result = self.test.determineTrump(["H6", "S8", "DK"])
+        self.assertEqual("D", result )
 
 def main():
     unittest.main()
