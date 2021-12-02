@@ -8,12 +8,12 @@ class SpoilFive():
 
     user_input=ConsoleInput()
     PlayingCard = PlayingCard()
-    leadingSuit = ""
-    trump = ""
+    leadingSuit = "S"
+    trump = "H"
     hierarchy = []
 
-    def __init__(self):
-        isLeadingtrick = False
+    def __init__(self, isPlayer):
+        self.isLeadingTrick = isPlayer
 
     def set_user_input(self, user_input):
         self.user_input = user_input
@@ -112,9 +112,9 @@ class SpoilFive():
             cardToPlay = self.user_input.get_input("Type the card you wish to play ")
             if cardToPlay in hand:
                 self.PlayingCard.play_a_card(hand, cardToPlay)
-                if self.isLeadingtrick == True:
+                if self.isLeadingTrick == True:
                     self.leadingSuit = cardToPlay[0]
-                    self.cardHierarchy = self.setHierarchy()
+                    self.cardHierarchy = self.setHierarchy(self.trump, self.leadingSuit)
                 return cardToPlay
             else:
                 print("That card is not in your hand")
@@ -124,5 +124,5 @@ class SpoilFive():
 
     
 
-player = SpoilFive()
-    
+player = SpoilFive(True)
+print(player.isLeadingTrick)

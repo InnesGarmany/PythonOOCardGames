@@ -5,7 +5,7 @@ from TestInput import TestInput
 
 class Test(unittest.TestCase):
 
-    test = SpoilFive()
+    test = SpoilFive(True)
 
     def test_start_round(self):
         test_input = TestInput()
@@ -34,3 +34,4 @@ def main():
 
 if __name__ == "__main__":
     unittest.main()
+
