@@ -26,5 +26,28 @@ class SpoilFive():
         global trump
         trump = self.determineTrump(deck)
 
+        global cardHierarchy
+        cardHierarchy = self.determineHierarchy()
+        
+
         return listOfHands
- 
+
+    def player_turn(self, hand):
+        for i in range(len(hand)):
+            print(hand[i], end = " ")
+        print(end="\n")
+
+        cardInHand = False
+        while not cardInHand:
+            cardToPlay = self.user_input.get_input("Type the card you wish to play ")
+            if cardToPlay in hand:
+                self.PlayingCard.play_a_card(hand, cardToPlay)
+                return cardToPlay
+            else:
+                print("That card is not in your hand")
+
+    def bot_turn(self, hand):
+
+
+player = SpoilFive()
+    

@@ -18,6 +18,16 @@ class Test(unittest.TestCase):
         result = self.test.determineTrump(["H6", "S8", "DK"])
         self.assertEqual("D", result )
 
+    def test_player_turn(self):
+        test_input = TestInput()
+        test_input.set_test_inputs(["C5"])
+        self.test.set_user_input(test_input)
+        result = self.test.player_turn(["C5", "D7", "H2"])
+        self.assertTrue(result == "C5")
+
+    def test_bot_turn(self):
+        
+
 def main():
     unittest.main()
 
