@@ -25,8 +25,9 @@ class Test(unittest.TestCase):
         result = self.test.player_turn(["C5", "D7", "H2"])
         self.assertTrue(result == "C5")
 
-    def test_bot_turn(self):
-        
+    def test_set_hierarchy(self):
+        result = self.test.setHierarchy("H", "S")
+        self.assertTrue(result[0] == "H5")
 
 def main():
     unittest.main()
