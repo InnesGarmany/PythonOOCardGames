@@ -1,4 +1,5 @@
-class TestInput:
+from interface import Input
+class TestInput(Input):
     test_inputs = []
 
     def set_test_inputs(self, inputs):
