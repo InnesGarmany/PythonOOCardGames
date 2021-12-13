@@ -1,5 +1,7 @@
 import random
 from PlayingCard import PlayingCard
+from ConsoleInput import ConsoleInput
+
 
 class BlackJack:
 
@@ -9,8 +11,12 @@ class BlackJack:
     max_ace_score = 11
     min_ace_score = 1
     good_number_of_cards = 5
+    user_input = ConsoleInput()
 
     playing_card = PlayingCard()
+
+    def set_user_input(self, user_input):
+        self.user_input = user_input
 
     def score_hand(self, hand):
         """Score an individual hand of playing cards. We add each card score to a total. All face cards King, Queen
@@ -48,9 +54,9 @@ class BlackJack:
      returns the answer in upper case. A while loop is used to prompt the user till the enter a valid response"""
         """Function to get a valid user input for the deal_to_user function"""
         allowed_answers = ["D", "S"]
-        answer = input("Please select (D)raw or (S)tick: ")
+        answer = self.user_input.get_input("Please select (D)raw or (S)tick: ")
         while answer.upper() not in allowed_answers:
-            answer = input("That is not a valid input. Please select (D)raw or (S)tick: ")
+            answer = self.user_input.get_input("That is not a valid input. Please select (D)raw or (S)tick: ")
         return answer.upper()
 
     def deal_to_user(self, deck, hand):
