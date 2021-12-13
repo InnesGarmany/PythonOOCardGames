@@ -1,4 +1,4 @@
-from interface import Input 
+from input import Input 
 class ConsoleInput(Input):
 
     def get_input(self,message):

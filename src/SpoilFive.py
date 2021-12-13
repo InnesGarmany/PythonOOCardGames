@@ -1,10 +1,13 @@
-
 import random
 from PlayingCard import PlayingCard
 from ConsoleInput import ConsoleInput
+from ConsoleOutput import ConsoleOutput
+
 
 class SpoilFive():
 
+    output = ConsoleOutput()
+    ConsoleOutput.output(output, "test")
 
     user_input=ConsoleInput()
     PlayingCard = PlayingCard()
