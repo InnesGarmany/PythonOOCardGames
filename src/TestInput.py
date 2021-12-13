@@ -1,4 +1,4 @@
-from interface import Input
+from input import Input
 class TestInput(Input):
     test_inputs = []
 
