@@ -10,4 +10,3 @@ Values of red - low to high
 Values of black - high to low
 Players must follow suit if possible - if they have a card that follows suit they must either play it or trump
 If a player doesn't have a card that follows suit they can play any card in their hand but non-trump cards will be unable to win
-If a player has the ace of hearts they can swap one of their cards for the revealed card on top of the deck
