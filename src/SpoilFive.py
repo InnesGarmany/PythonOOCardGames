@@ -106,11 +106,15 @@ class SpoilFive():
         
 
         return listOfHands
+    
+    def start_trick(self):
+        pass
 
     def player_turn(self, hand):
         for i in range(len(player.hand)):
             self.output.output(player.hand[i], " ")
         self.output.output("")
+
 
         cardInHand = False
         while not cardInHand:
@@ -124,13 +128,37 @@ class SpoilFive():
             else:
                 self.output.output("That card is not in your hand")
 
+
+
     def CPU_turn(self,CPU):
         if CPU.isLeading: #The decision of which card to play first is low-impact and thus randomized
             cardToPlay = random.randint(0, len(CPU.hand))
             CPU.playCard(cardToPlay)
             self.cardsPlayed.append(cardToPlay)
+
         else:
-            pass
+            bestCard = len(self.hierarchy)+2
+            worstCard = -2
+            goodPlayFound = False
+
+            for card in CPU.hand:
+                for playedCard in self.cardsPlayed:
+                    if self.hierarchy.find(card) < self.hierarchy.find(playedCard) and self.hierarchy.find(card) < bestCard:
+                        bestCard = self.hierarchy.find(card)
+                        goodPlayFound = True
+
+                    elif self.hierarchy.find(card) > self.hierarchy.find(playedCard) and self.hierarchy.find(card) > worstCard:
+                        worstCard = self.hierarchy.find(card)
+                        
+            if goodPlayFound:
+                CPU.playCard(bestCard)
+                self.cardsPlayed.append(bestCard)
+                self.output.output(bestCard + " has been played. The cards in play are " + self.cardsPlayed)
+            else: 
+                CPU.playCard(worstCard)
+                self.cardsPlayed.append(worstCard)
+                self.output.output(bestCard + " has been played. The cards in play are " + self.cardsPlayed)
+
 
 
     
