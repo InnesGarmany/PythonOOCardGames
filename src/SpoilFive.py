@@ -120,7 +120,7 @@ class SpoilFive():
         while not cardInHand:
             cardToPlay = self.user_input.get_input("Type the card you wish to play ")
             if cardToPlay in hand:
-                player.playCard(hand, cardToPlay)
+                player.playCard( cardToPlay)
                 self.cardsPlayed.append(cardToPlay)
                 if player.isLeading == True:
                     self.setLeadSuit(cardToPlay[0])
@@ -163,7 +163,7 @@ class SpoilFive():
 
     
 CPUdict = {}
-spoilFive = SpoilFive(True)
+spoilFive = SpoilFive()
 listOfHands = spoilFive.start_round()
 player = Player(listOfHands.pop())
 i=0
