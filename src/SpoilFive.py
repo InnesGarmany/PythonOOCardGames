@@ -129,7 +129,7 @@ class SpoilFive():
             cardToPlay = self.user_input.get_input("Type the card you wish to play ")
             if cardToPlay in playerOBJ.hand:
                 if isLeading:
-                    self.cardsPlayed.append(cardToPlay)
+                    self.cardsPlayed.append(cardToPlay)  
                     self.setLeadSuit(cardToPlay[0])
                     return cardToPlay
                 else:
