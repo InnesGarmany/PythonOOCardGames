@@ -2,21 +2,20 @@ import random
 from PlayingCard import PlayingCard
 from ConsoleInput import ConsoleInput
 from ConsoleOutput import ConsoleOutput
-
+from output import Output
+from Player import Player
 
 class SpoilFive():
 
     output = ConsoleOutput()
-    ConsoleOutput.output(output, "test")
+    
 
     user_input=ConsoleInput()
     PlayingCard = PlayingCard()
     leadingSuit = "S"
     trump = "H"
     hierarchy = []
-
-    def __init__(self, isPlayer):
-        self.isLeadingTrick = isPlayer
+    cardsPlayed = []
 
     def set_user_input(self, user_input):
         self.user_input = user_input
@@ -90,6 +89,9 @@ class SpoilFive():
 
         return self.hierarchy
 
+    def setLeadSuit(self, leadSuit):
+        self.leadingSuit = leadSuit
+        self.cardHierarchy = self.setHierarchy(self.trump, self.leadingSuit)
 
 
 
@@ -104,28 +106,69 @@ class SpoilFive():
         
 
         return listOfHands
+    
+    def start_trick(self):
+        pass
 
     def player_turn(self, hand):
-        for i in range(len(hand)):
-            print(hand[i], end = " ")
-        print(end="\n")
+        for i in range(len(player.hand)):
+            self.output.output(player.hand[i], " ")
+        self.output.output("")
+
 
         cardInHand = False
         while not cardInHand:
             cardToPlay = self.user_input.get_input("Type the card you wish to play ")
             if cardToPlay in hand:
-                self.PlayingCard.play_a_card(hand, cardToPlay)
-                if self.isLeadingTrick == True:
-                    self.leadingSuit = cardToPlay[0]
-                    self.cardHierarchy = self.setHierarchy(self.trump, self.leadingSuit)
+                player.playCard(hand, cardToPlay)
+                self.cardsPlayed.append(cardToPlay)
+                if player.isLeading == True:
+                    self.setLeadSuit(cardToPlay[0])
                 return cardToPlay
             else:
-                print("That card is not in your hand")
+                self.output.output("That card is not in your hand")
 
-    def bot_turn(self, hand):
-        pass
+
+
+    def CPU_turn(self,CPU):
+        if CPU.isLeading: #The decision of which card to play first is low-impact and thus randomized
+            cardToPlay = random.randint(0, len(CPU.hand))
+            CPU.playCard(cardToPlay)
+            self.cardsPlayed.append(cardToPlay)
+
+        else:
+            bestCard = len(self.hierarchy)+2
+            worstCard = -2
+            goodPlayFound = False
+
+            for card in CPU.hand:
+                for playedCard in self.cardsPlayed:
+                    if self.hierarchy.find(card) < self.hierarchy.find(playedCard) and self.hierarchy.find(card) < bestCard:
+                        bestCard = self.hierarchy.find(card)
+                        goodPlayFound = True
+
+                    elif self.hierarchy.find(card) > self.hierarchy.find(playedCard) and self.hierarchy.find(card) > worstCard:
+                        worstCard = self.hierarchy.find(card)
+                        
+            if goodPlayFound:
+                CPU.playCard(bestCard)
+                self.cardsPlayed.append(bestCard)
+                self.output.output(bestCard + " has been played. The cards in play are " + self.cardsPlayed)
+            else: 
+                CPU.playCard(worstCard)
+                self.cardsPlayed.append(worstCard)
+                self.output.output(bestCard + " has been played. The cards in play are " + self.cardsPlayed)
+
+
 
     
+CPUdict = {}
+spoilFive = SpoilFive(True)
+listOfHands = spoilFive.start_round()
+player = Player(listOfHands.pop())
+i=0
+for hand in listOfHands:
+    i+=1
+    CPUdict["CPU"+str(i)] = Player(hand)
 
-player = SpoilFive(True)
-print(player.isLeadingTrick)
+
