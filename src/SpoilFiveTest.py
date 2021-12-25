@@ -21,12 +21,27 @@ class Test(unittest.TestCase):
         self.assertEqual("D", result )
 
     def test_player_turn(self):
+        self.test.leadingSuit = "S"
         test_input = TestInput()
         test_input.set_test_inputs(["H2", "SK"])
         self.test.set_user_input(test_input)
-        result = self.test.player_turn(self.testPlayer, True)
-        print("THIS IS RESULT" + result)
+        result = self.test.player_turn(self.testPlayer)
         self.assertTrue(result == "SK")
+
+    def test_player_turn_going_first(self):
+        test_input = TestInput()
+        test_input.set_test_inputs(["H2", "C5"])
+        self.test.set_user_input(test_input)
+        result = self.test.player_turn(self.testPlayer, True)
+        self.assertTrue(result == "C5")
+
+    def test_player_turn_illegal_play(self):
+        self.test.leadingSuit = "C"
+        test_input = TestInput()
+        test_input.set_test_inputs(["C2", "SK"])
+        self.test.set_user_input(test_input)
+        result = self.test.player_turn(self.testPlayer)
+        self.assertTrue(result == "C2")
 
     def test_set_hierarchy(self):
         result = self.test.setHierarchy("H", "S")
@@ -43,6 +58,7 @@ class Test(unittest.TestCase):
     def test_CPU_turn_isntLeading(self):
         result = self.test.CPU_turn(self.testPlayer)
         self.assertEqual(result, "H2")
+
 
 
 def main():
