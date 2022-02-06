@@ -139,7 +139,7 @@ class SpoilFive():
     def player_turn(self, playerOBJ, isLeading=False):
         self.output.output("Trump is " + self.trump +".")
         if not isLeading:
-            self.output.output("These are the cards that have already been played " + str(self.cardsPlayed))
+            self.output.output("These are the cards that have already been played " + str(self.cardsPlayed) +"\n")
         self.output.output("This is your hand")
         for i in range(len(playerOBJ.hand)):
             self.output.output(playerOBJ.hand[i], " ")
@@ -219,9 +219,9 @@ class SpoilFive():
         self.players[trueWinnerPosition].noOfTricks += 1
 
         if  trueWinnerPosition== 0:
-            self.output.output("You won a trick!")
+            self.output.output("You won a trick! \n")
         else:
-            self.output.output("Player " + str(trueWinnerPosition + 1)  + " won that trick.")
+            self.output.output("Player " + str(trueWinnerPosition + 1)  + " won that trick. \n")
         return trueWinnerPosition
 
     
